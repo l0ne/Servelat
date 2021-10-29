@@ -1,4 +1,4 @@
-# Servelat
+# Servelat - modern backend boilerplate with Typescript, Prisma, Hapi
 
 An app for the quick start of backend development. It has registration, JWT authorization, and confirmation emails. It uses Postgresql and Prisma. 
 

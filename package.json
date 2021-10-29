@@ -4,10 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "prisma generate && tsc",
     "test": "TEST=true jest",
     "compile": "tsc",
     "dev": "ts-node-dev --respawn ./src/index.ts",
-    "test:watch": "TEST=true jest --watch"
+    "seed": "prisma db seed --preview-feature",
+    "test": "TEST=true jest",
+    "test:watch": "TEST=true jest --watch",
+    "postgres:start": "docker-compose up -d",
+    "db:push": "prisma db push --preview-feature",
+    "migrate:reset": "prisma migrate reset",
+    "migrate:create": "prisma migrate dev --create-only",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "prisma:generate": "prisma generate"
   },
   "author": "",
   "license": "ISC",
