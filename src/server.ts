@@ -8,7 +8,7 @@ import authPlugin from "./plugins/auth";
 
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 3000,
-  host: process.env.HOST || 'localhost',
+  host: process.env.HOST || '0.0.0.0',
 })
 
 export async function createServer(): Promise<Hapi.Server> {
