@@ -1,11 +1,14 @@
 import { createServer } from '../src/server'
-import Hapi from '@hapi/hapi'
+import Hapi, {AuthCredentials} from '@hapi/hapi'
+import {createUserCredentials} from "./test-helpers";
 
 describe('POST /users - create user', () => {
   let server: Hapi.Server
+  let testUserCredentials: AuthCredentials
 
   beforeAll(async () => {
     server = await createServer()
+    testUserCredentials = await createUserCredentials(server.app.prisma, false)
   })
 
   afterAll(async () => {
@@ -43,54 +46,4 @@ describe('POST /users - create user', () => {
     expect(response.statusCode).toEqual(400)
   })
 
-  test('get user returns 404 for non existant user', async () => {
-    const response = await server.inject({
-      method: 'GET',
-      url: '/users/9999',
-    })
-
-    expect(response.statusCode).toEqual(404)
-  })
-
-  test('get user returns user', async () => {
-    const response = await server.inject({
-      method: 'GET',
-      url: `/users/${userId}`,
-    })
-    expect(response.statusCode).toEqual(200)
-    const user = JSON.parse(response.payload)
-
-    expect(user.id).toBe(userId)
-  })
-
-  test('delete user fails with invalid userId parameter', async () => {
-    const response = await server.inject({
-      method: 'DELETE',
-      url: `/users/aa22`,
-    })
-    expect(response.statusCode).toEqual(400)
-  })
-
-  test('update user fails with invalid userId parameter', async () => {
-    const response = await server.inject({
-      method: 'PUT',
-      url: `/users/aa22`,
-    })
-    expect(response.statusCode).toEqual(400)
-  })
-
-  test('update user', async () => {
-    const updatedName = 'test-first-name-UPDATED'
-
-    const response = await server.inject({
-      method: 'PUT',
-      url: `/users/${userId}`,
-      payload: {
-        name: updatedName,
-      },
-    })
-    expect(response.statusCode).toEqual(200)
-    const user = JSON.parse(response.payload)
-    expect(user.name).toEqual(updatedName)
-  })
 })
