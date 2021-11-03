@@ -4,7 +4,7 @@ import statusPlugin from './plugins/status'
 import prismaPlugin from './plugins/prisma'
 import usersPlugin from './plugins/users'
 import emailPlugin from './plugins/email'
-import authPlugin from "./plugins/auth";
+import authPlugin from "./plugins/authPlugin";
 
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 3000,

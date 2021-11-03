@@ -1,7 +1,7 @@
 import Hapi, {RouteOptionsResponseSchema} from '@hapi/hapi'
 import Joi from '@hapi/joi'
 import Boom from "@hapi/boom";
-import {API_AUTH_STATEGY} from "./auth";
+import {API_AUTH_STATEGY} from "../env";
 
 const usersPlugin = {
   name: 'app/users',
